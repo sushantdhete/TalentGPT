@@ -1,0 +1,70 @@
+team_name: "TalentGPT"
+primary_contact:
+  name: "Sushant Dhete"
+  email: "your-email@gmail.com"
+  phone: "+91-XXXXXXXXXX"
+team_members:
+  - name: "Sushant Dhete"
+    email: "your-email@gmail.com"
+    role: "AI Developer & Full Stack Engineer"
+
+github_repo: "https://github.com/sushantdhete/TalentGPT"
+sandbox_link: "https://github.com/sushantdhete/TalentGPT"
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
+
+compute:
+  platform: "Local Windows PC"
+  cpu_cores: 8
+  ram_gb: 16
+  python_version: "3.11"
+  os: "Windows 11"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: false
+  pre_computation_time_minutes: 0
+
+ai_tools_used:
+  - "Claude"
+ai_usage_summary: |
+  Used Claude for system architecture design, code review, and debugging.
+  No candidate data was fed to any external LLM during ranking.
+  All scoring is done locally via deterministic algorithms.
+
+methodology_summary: |
+  TalentGPT uses a 5-component multi-agent scoring pipeline that runs fully
+  offline on CPU in under 5 minutes for 50K candidates.
+
+  COMPONENT 1 — Skill Intelligence (38% weight):
+  Matches candidate skills against 70+ AI/ML core skills. Scores each
+  skill by proficiency level (expert=1.0 to beginner=0.4), endorsement
+  count, usage duration, and tier-1 AI skill bonus. Platform assessment
+  scores provide an objective verification bonus. Normalized 0-100.
+
+  COMPONENT 2 — Behavioral Signals (28% weight):
+  Uses Redrob platform signals directly: profile completeness, recruiter
+  response rate (strongest single signal), interview completion rate,
+  GitHub activity score, recency of last activity, and verification status.
+  These signals distinguish genuine active candidates from passive profiles.
+
+  COMPONENT 3 — Experience (18% weight):
+  Non-linear experience scoring peaks at 5-8 years (optimal zone for
+  AI/ML roles). Bonuses for tech industry background, stable tenures,
+  and current roles in relevant sectors.
+
+  COMPONENT 4 — Education (10% weight):
+  Institution tier (tier_1 through tier_4) × field of study relevance
+  × degree level. CS/ML/Data Science fields score highest.
+
+  COMPONENT 5 — Certifications (6% weight):
+  Recency-weighted certification scoring. AI/ML certs score highest,
+  followed by cloud certs. Older certs receive partial credit.
+
+  Final score = weighted sum, normalized 0.0–1.0.
+  Runtime: ~2-5 minutes for 50K candidates on standard CPU.
+
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: false
+  reproduction_tested: true
